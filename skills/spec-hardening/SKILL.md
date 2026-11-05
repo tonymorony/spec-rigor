@@ -51,6 +51,7 @@ Use the project's spec format (the one sibling specs follow; fall back to Overvi
 - Every number carries its reason in the rationale: why this value and not half or double.
 - Every computed figure has a formula, a tie rule, rounding, bounds and units, plus a worked example with real numbers under the rule.
 - Every domain noun is a glossary term, defined before first use, with one meaning. A new term goes to the user as a proposal (term, definition, aliases, example) before it enters the spec. A glossary definition says what the term is in one or two sentences and cites the rule IDs. It does not copy the conditions of a rule, because a copy drifts when the rule changes.
+- Name each step, slice and release by its place or by what it delivers, such as "the delivery step" or "the import on the account page". A reader then follows the spec with no map of the numbers. A slice number belongs only in the pull request title, the branch and the ticket (step 3). A new step name is a glossary term, and its number is the alias.
 - Every Edge Case cites the rule it applies; every Open Question follows the open-question rules at the end of this file.
 
 Done when: the grid maps onto rule and edge-case IDs with no orphan cell, and no sentence lacks a ledger entry.
@@ -100,7 +101,7 @@ A search for words finds only rows that repeat the edit. A stale row often share
 
 Then run the **diff check**: read the diff against the version before this step. Only the intended lines may change. Restore any lost line. A scripted edit, a merge and a conflict resolution lose lines most often.
 
-Then run the **lint**: `python3 -I <this skill's folder>/spec_lint.py <spec>` from the repository root. It reports duplicate, dangling and out-of-order IDs, code citations with line numbers, missing paths, and changed rules that are too long. In a stack, add `--upper <branch>` for each higher slice and `--since <commit before your edit>`. Fix each report, or name it at the gate.
+Then run the **lint**: `python3 -I <this skill's folder>/spec_lint.py <spec>` from the repository root. It reports duplicate, dangling and out-of-order IDs, steps and slices named by number, code citations with line numbers, missing paths, and changed rules that are too long. In a stack, add `--upper <branch>` for each higher slice and `--since <commit before your edit>`. Fix each report, or name it at the gate.
 
 After a rebase, or when you take over commits from another session, re-read each commit. Check its content against the current spec and glossary. A patch that applies cleanly can still state an old decision.
 

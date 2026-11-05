@@ -17,6 +17,9 @@ Run it from the repository root. It reports:
 - long-rule: a rule cell holds more than 5 sentences; split the rule.
 - long-sentence: a sentence in a rule cell has more than 20 words.
   Both size checks read only the rows added or changed since --since.
+- numbered-name: a line added or changed since --since names a step
+  or a slice by its number ("step 1", "slice 2"); name it by its place
+  or by what it delivers.
 - upstack: with --upper, an ID that this file added since --since
   (default HEAD) heads a different row in a higher slice of the stack.
   --repo-path names the file in git when <spec.md> is a copy.
@@ -37,6 +40,7 @@ EXTERNAL = re.compile(r"(?<![\w-])([A-Za-z][a-z-]*)\s+(?:BR|EC|OQ)-\d+\s*$")
 CODE = re.compile(r"`([\w./-]+\.[a-z]{1,5})(:\d+(?:-\d+)?)?`")
 SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\"`(])")
 STABLE = "Numbers are stable across slices"
+NUMBERED = re.compile(r"\b(?:steps?|slices?)\s+\d+\b", re.I)
 MAX_SENTENCES, MAX_WORDS = 5, 20
 
 
@@ -105,7 +109,11 @@ def main(argv):
             if len(x.split()) > MAX_WORDS:
                 report.append(f"long-sentence {id_}: line {n}, {len(x.split())} words: {x[:50]}...")
 
+    old_lines = set(git_show(since, repo_path or path).splitlines())
     for n, line in enumerate(text.splitlines(), 1):
+        if line not in old_lines:
+            for m in NUMBERED.finditer(line):
+                report.append(f"numbered-name \"{m.group(0)}\": line {n}")
         for m in CITE.finditer(line):
             ext = EXTERNAL.search(line[:m.end()])
             if ext and is_spec(ext.group(1), specs):
