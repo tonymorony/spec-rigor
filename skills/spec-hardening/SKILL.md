@@ -51,7 +51,7 @@ Use the project's spec format (the one sibling specs follow; fall back to Overvi
 - Every number carries its reason in the rationale: why this value and not half or double.
 - Every computed figure has a formula, a tie rule, rounding, bounds and units, plus a worked example with real numbers under the rule.
 - Every domain noun is a glossary term, defined before first use, with one meaning. A new term goes to the user as a proposal (term, definition, aliases, example) before it enters the spec. A glossary definition says what the term is in one or two sentences and cites the rule IDs. It does not copy the conditions of a rule, because a copy drifts when the rule changes.
-- Name each step, slice and release by its place or by what it delivers, such as "the delivery step" or "the import on the account page". A reader then follows the spec with no map of the numbers. A slice number belongs only in the pull request title, the branch and the ticket (step 3). A new step name is a glossary term, and its number is the alias.
+- Name each step, slice and release by its place or by what it delivers, such as "the delivery step" or "the import on the account page". A reader then follows the spec with no map of the numbers. A slice number belongs only in the pull request title, the branch and the ticket (step 3). A new step name is a glossary term. Its number becomes the alias once every spec uses the name; until then, the definition names the number.
 - Every Edge Case cites the rule it applies; every Open Question follows the open-question rules at the end of this file.
 
 Done when: the grid maps onto rule and edge-case IDs with no orphan cell, and no sentence lacks a ledger entry.
