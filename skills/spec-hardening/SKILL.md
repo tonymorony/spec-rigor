@@ -133,6 +133,14 @@ A build ticket comes after its design. A slice with a design ticket gets its bui
 - Link the build ticket to the design ticket, the merged design pull request, the spec and its rule IDs.
 - When you work on a feature, check each of its design tickets. A design ticket with a merged pull request and no build ticket gets one. This keeps every slice moving from spec to design to build.
 
+**Ticket layout.** The engineer reads a ticket from top to bottom, with no map of numbers. Write each ticket for that reader.
+
+- **A story holds its own acceptance criteria.** When a build ticket is split into stories (sub-issues), write the full text of each criterion in the story that builds it, numbered from 1. Never write "AC 4 of <parent>": the engineer must not open a second ticket to learn what to build. A criterion that two stories share is split into its sentences, and each story gets its own sentences.
+- **The parent is a short hub.** It keeps the Why, one table (story, what the user gets, size), the build order, the release condition, the design links, the technical considerations that more than one story shares, the dependencies and the spec. It has no list of acceptance criteria.
+- **Write the order as a numbered list**, one step for each line, not as a paragraph. Example: "1. ABC-12 first. 2. Then ABC-14 and ABC-15, in any order."
+- **A link to a ticket shows only its ID.** Write a plain Markdown link, `[ABC-12](<ticket URL>)`. Some trackers, Linear for example, show the full title of the ticket for a rich mention or a pasted URL, and a line of three titles cannot be read. The title belongs in the table, in its own column, when the reader needs it.
+- **Before you post**, read the ticket as it shows in the tracker, once from top to bottom. Each link shows only its ID, and no section points to a criterion in another ticket.
+
 ## Open Questions
 
 An open question is a hole a reviewer can attack, so each one is either closed or **fenced**.
